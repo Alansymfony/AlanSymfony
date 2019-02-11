@@ -1,5 +1,5 @@
 <?php
-<<<<<<< HEAD
+
 
 namespace App\Controller;
 

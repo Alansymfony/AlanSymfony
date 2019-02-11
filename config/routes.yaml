@@ -10,9 +10,9 @@
 app_lucky_number:
     path: /lucky/number
     controller: App\Controller\LuckyController::number
-<<<<<<< HEAD
+
     
-form _formation: 
+form_formation: 
     path: /formation/create
     controller: App\Controller\FormationController::create
     
@@ -32,6 +32,12 @@ valid_loisir:
     path: /loisirs/valid_loisir
     controller: App\Controller\LoisirsController::valid
     
+form_experiences: 
+    path: /experiences/create
+    controller: App\Controller\ExperiencesController::create
+    
+valid_experiences: 
+    path: /experiences/valid_experiences
+    controller: App\Controller\ExperiencesController::valid
+    
 
-=======
->>>>>>> 2a6d1c77c19243b94d0a5381dc3c097b21575c64

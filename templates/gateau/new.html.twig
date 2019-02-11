@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Gateau{% endblock %}
+
+{% block body %}
+    <h1>Create new Gateau</h1>
+
+    {{ include('gateau/_form.html.twig') }}
+
+    <a href="{{ path('gateau_index') }}">back to list</a>
+{% endblock %}
