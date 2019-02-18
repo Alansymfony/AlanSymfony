@@ -11,7 +11,6 @@ app_lucky_number:
     path: /lucky/number
     controller: App\Controller\LuckyController::number
 
-    
 form_formation: 
     path: /formation/create
     controller: App\Controller\FormationController::create

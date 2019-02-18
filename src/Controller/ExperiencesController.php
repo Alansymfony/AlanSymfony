@@ -2,46 +2,95 @@
 
 namespace App\Controller;
 
+use App\Entity\Experiences;
+use App\Form\Experiences1Type;
+use App\Repository\ExperiencesRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use App\Entity\Experiences;
-use App\Form\ExperiencesType;
+use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/experiences")
+ */
 class ExperiencesController extends Controller
 {
-    public function create()
+    /**
+     * @Route("/", name="experiences_index", methods={"GET"})
+     */
+    public function index(ExperiencesRepository $experiencesRepository): Response
     {
-        $experiences = new Experiences();
-        $form = $this->createForm(ExperiencesType::class, $experiences);
-        
-        return $this->render('experiences/create.html.twig', [
-            'entity' => $experiences,
-            'form' => $form->createView(),
-            ]
-            );
+        return $this->render('experiences/index.html.twig', [
+            'experiences' => $experiencesRepository->findAll(),
+        ]);
     }
- public function valid(Request $request)
- {
-     $experiences = new Experiences();
-     $form = $this->createForm(ExperiencesType::class, $experiences);
-     
-     $form->handleRequest($request);
-     if ($form->isSubmitted() && $form->isValid()) {
-         $experiences = $form->getData();
-         
-         $entityManager = $this->getDoctrine()->getManager();
-         $entityManager->persist($experiences);
-         $entityManager->flush();
-         
-         return $this->redirectToRoute('app_lucky_number');
-         
-     }
-     
-     return $this->render('experiences/create.html.twig', [
-         'entity' => $experiences,
-         'form' => $form->createView(),
-         ]
-         );
- }
+
+    /**
+     * @Route("/new", name="experiences_new", methods={"GET","POST"})
+     */
+    public function new(Request $request): Response
+    {
+        $experience = new Experiences();
+        $form = $this->createForm(Experiences1Type::class, $experience);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($experience);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('experiences_index');
+        }
+
+        return $this->render('experiences/new.html.twig', [
+            'experience' => $experience,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="experiences_show", methods={"GET"})
+     */
+    public function show(Experiences $experience): Response
+    {
+        return $this->render('experiences/show.html.twig', [
+            'experience' => $experience,
+        ]);
+    }
+
+    /**
+     * @Route("/{id}/edit", name="experiences_edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Experiences $experience): Response
+    {
+        $form = $this->createForm(Experiences1Type::class, $experience);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('experiences_index', [
+                'id' => $experience->getId(),
+            ]);
+        }
+
+        return $this->render('experiences/edit.html.twig', [
+            'experience' => $experience,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="experiences_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, Experiences $experience): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$experience->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($experience);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('experiences_index');
+    }
 }
