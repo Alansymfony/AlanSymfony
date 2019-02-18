@@ -40,3 +40,6 @@ valid_experiences:
     controller: App\Controller\ExperiencesController::valid
     
 
+admin:
+    path: /admin
+    controller: App\Controller\LuckyController::admin

@@ -50,4 +50,11 @@ public function create () {
     $eManager->persist($form);
     $eManager->flush();
     }
+    
+    public function admin()
+    {
+        return new Response('<html><body>Admin page!</body></html>');
+    }
+
+
 }
