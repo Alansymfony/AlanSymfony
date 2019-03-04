@@ -9,10 +9,10 @@ security:
             memory:
                 users: 
                     alan:
-                        password: $2y$12$XcbLw6EJ7QO7EvlvCPfQGuUzR3SI1SZ53GsyoTD3N70Zkw.wkRCWy   
+                        password:  $2y$12$UlPnKw17ZeJFLmSOCh5n4OnQQPa54Tpht0zCNICtJMGjf.jDi96vS    
                         roles: 'ROLE_USER'
                     admin:
-                        password: $2y$12$XcbLw6EJ7QO7EvlvCPfQGuUzR3SI1SZ53GsyoTD3N70Zkw.wkRCWy   
+                        password:  $2y$12$UlPnKw17ZeJFLmSOCh5n4OnQQPa54Tpht0zCNICtJMGjf.jDi96vS    
                         roles: 'ROLE_ADMIN'
     firewalls:
         dev:

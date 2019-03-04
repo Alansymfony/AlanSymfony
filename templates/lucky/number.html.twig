@@ -61,9 +61,9 @@
 						<p class="subDetails"></p>
 						<p>
 		 		 <h3>{{ formation.getdescription() }} </h3> </p>
-                    <a href="{{ path('formation_show', {'id': formation.id}) }}">show</a>
-                    <a href="{{ path('formation_edit', {'id': formation.id}) }}">edit</a>
-                    <a href="{{ path('formation_delete', {'id': formation.id}) }}">delete</a>
+                    {% if is_granted('ROLE_ADMIN') %}<a href="{{ path('formation_show', {'id': formation.id}) }}">show</a>{% endif %}
+                      {% if is_granted('ROLE_ADMIN') %}<a href="{{ path('formation_edit', {'id': formation.id}) }}">edit</a>{% endif %}
+                      {% if is_granted('ROLE_ADMIN') %}<a href="{{ path('formation_delete', {'id': formation.id}) }}">delete</a>{% endif %}
 				{% endfor %}
 				</article>
 			</div>
@@ -84,9 +84,9 @@
 					<td> {{ loisir.getName() }} </td>
 					<td> {{ loisir.getdescription() }} </td>
 				  <td>
-                    <a href="{{ path('loisirs_show', {'id': loisir.id}) }}">show</a>
-                    <a href="{{ path('loisirs_edit', {'id': loisir.id}) }}">edit</a>
-                    <a href="{{ path('loisirs_delete', {'id': loisir.id}) }}">delete</a>
+                      {% if is_granted('ROLE_ADMIN') %}<a href="{{ path('loisirs_show', {'id': loisir.id}) }}">show</a>{% endif %}
+                     {% if is_granted('ROLE_ADMIN') %} <a href="{{ path('loisirs_edit', {'id': loisir.id}) }}">edit</a>{% endif %}
+                      {% if is_granted('ROLE_ADMIN') %}<a href="{{ path('loisirs_delete', {'id': loisir.id}) }}">delete</a>{% endif %}
                 </td>
                 </p>
 					{% endfor %}
@@ -105,9 +105,9 @@
 		 		 		<h2>{{ experience.getName() }} </h2> 
 						<p class="subDetails"></p>
 						<p> {{ experience.getDescription() }} </p>
-						 <a href="{{ path('experiences_show', {'id': experience.id}) }}">show</a>
-                         <a href="{{ path('experiences_edit', {'id': experience.id}) }}">edit</a>
-                         <a href="{{ path('experiences_delete', {'id': experience.id}) }}">delete</a>
+						   {% if is_granted('ROLE_ADMIN') %}<a href="{{ path('experiences_show', {'id': experience.id}) }}">show</a>{% endif %}
+                           {% if is_granted('ROLE_ADMIN') %}<a href="{{ path('experiences_edit', {'id': experience.id}) }}">edit</a>{% endif %}
+                           {% if is_granted('ROLE_ADMIN') %}<a href="{{ path('experiences_delete', {'id': experience.id}) }}">delete</a>{% endif %}
 				{% endfor %}
 				</article>
 			</div>
